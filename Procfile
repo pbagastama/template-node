@@ -1,1 +1,1 @@
-"web: node app.js public/" 
+"web: node app.js" > Procfile"
