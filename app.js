@@ -3,23 +3,23 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const livereload = require("livereload");
-const connectLiveReload = require("connect-livereload");
+// const livereload = require("livereload");
+// const connectLiveReload = require("connect-livereload");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-const liveReloadServer = livereload.createServer();
-liveReloadServer.watch(path.join(__dirname, 'public'));
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
-});
+// const liveReloadServer = livereload.createServer();
+// liveReloadServer.watch(path.join(__dirname, 'public'));
+// liveReloadServer.server.once("connection", () => {
+//   setTimeout(() => {
+//     liveReloadServer.refresh("/");
+//   }, 100);
+// });
 
 const app = express();
-app.use(connectLiveReload());
-const port = 5000
+// app.use(connectLiveReload());
+// const port = 5000
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -52,7 +52,10 @@ app.use(function(err, req, res, next) {
 
 // app.listen(8080);
 // console.log('8080 is the magic port');
-app.listen(port, () => console.info(`App listening on port ${port}`))
+app.listen(process.env.PORT || 5000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
+// app.listen(port, () => console.info(`App listening on port ${port}`))
 
 /* GET home page. */
 // router.get('/', function(req, res, next) {
